@@ -1,6 +1,6 @@
 ### 📊 Resultados da Normalização 
 
-A fase de normalização de dados foi concluída. O arquivo base que você deve usar para alimentar o Grafo no `NetworkX` é o `data/processed/culinarydb_arestas.csv`. Ele contém as conexões limpas e bidimensionais entre o País (Região) e o Ingrediente Padronizado.
+A fase de normalização de dados foi concluída. O arquivo base que você deve usar para alimentar o Grafo é o `data/processed/culinarydb_arestas.csv`. Ele contém as conexões limpas e bidimensionais entre o País (Região) e o Ingrediente Padronizado.
 
 #### Raio-X da Base de Dados (Validação)
 
