@@ -1,0 +1,99 @@
+{
+  "total_vertices": 692,
+  "total_regions": 26,
+  "total_ingredients": 666,
+  "total_edges": 7875,
+  "removed_ubiquitous": [
+    "butter",
+    "egg",
+    "garlic",
+    "olive",
+    "onion",
+    "pepper",
+    "salt",
+    "sugar",
+    "water"
+  ],
+  "max_ingredient_freq_threshold": 0.2,
+  "min_ingredient_uses_threshold": 3,
+  "regions": [
+    "africa",
+    "australia & nz",
+    "british isles",
+    "canada",
+    "caribbean",
+    "china",
+    "dach countries",
+    "eastern europe",
+    "france",
+    "greece",
+    "indian subcontinent",
+    "italy",
+    "japan",
+    "korea",
+    "mexico",
+    "middle east",
+    "misc.: belgian",
+    "misc.: central america",
+    "misc.: dutch",
+    "misc.: portugal",
+    "scandinavia",
+    "south america",
+    "south east asia",
+    "spain",
+    "thailand",
+    "usa"
+  ],
+  "top10_edges_by_weight": [
+    {
+      "region": "indian subcontinent",
+      "ingredient": "asafoetida",
+      "weight": 0.32557721011012286
+    },
+    {
+      "region": "indian subcontinent",
+      "ingredient": "ghee",
+      "weight": 0.3170374800088737
+    },
+    {
+      "region": "indian subcontinent",
+      "ingredient": "mustard oil",
+      "weight": 0.3169734747233733
+    },
+    {
+      "region": "greece",
+      "ingredient": "cheese feta",
+      "weight": 0.1930765376701083
+    },
+    {
+      "region": "misc.: central america",
+      "ingredient": "burrito",
+      "weight": 0.18321066839010974
+    },
+    {
+      "region": "korea",
+      "ingredient": "sesame",
+      "weight": 0.16386871003285156
+    },
+    {
+      "region": "misc.: belgian",
+      "ingredient": "cheese gruyere",
+      "weight": 0.15715399951221948
+    },
+    {
+      "region": "japan",
+      "ingredient": "sake",
+      "weight": 0.1547104942666008
+    },
+    {
+      "region": "indian subcontinent",
+      "ingredient": "curry leaf",
+      "weight": 0.15145601671952563
+    },
+    {
+      "region": "japan",
+      "ingredient": "bonito",
+      "weight": 0.14621507938330122
+    }
+  ]
+}
