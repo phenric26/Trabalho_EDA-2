@@ -1,6 +1,6 @@
 ### 📊 Resultados da Normalização 
 
-A fase de normalização de dados foi concluída. O arquivo base que você deve usar para alimentar o Grafo é o `data/processed/culinarydb_arestas.csv`. Ele contém as conexões limpas e bidimensionais entre o País (Região) e o Ingrediente Padronizado.
+A fase de normalização de dados foi concluída. O arquivo base para alimentar o Grafo é o `data/processed/culinarydb_arestas.csv`. Ele contém as conexões limpas e bidimensionais entre o País (Região) e o Ingrediente Padronizado.
 
 #### Raio-X da Base de Dados (Validação)
 
@@ -34,8 +34,8 @@ Ingredientes Raros (usados <= 2 vezes): 160 (18.5% de todos os ingredientes)
 Ingredientes como Sal, Água, Alho e Cebola aparecem em quase 40% de todas as receitas do mundo. Se remover, o algoritmo de grafos vai concluir que o Japão e o México são culinárias "irmãs" simplesmente porque ambos usam água e sal.
 
 
-A Solução (acho que resolve): Antes de adicionar os nós ao grafo, crie um limite que delete ingredientes que apareçam demais, como por exemplo 20% do total de receitas
+A Solução (acho que resolve): Antes de adicionar os nós ao grafo, criar um limite que delete ingredientes que apareçam demais, como por exemplo 20% do total de receitas
 
 
 ## Problema 2: 
-A nossa base de dados é desequilibrada. Os EUA possuem mais de 16.000 receitas mapeadas, enquanto países como a França possuem apenas 2.700. Se você criar o peso da aresta somando a quantidade absoluta de ingredientes em comum, os EUA vão parecerconectados a todos os outros países apenas por terem um grande volume de dados. 
+A base de dados é desequilibrada. Os EUA possuem mais de 16.000 receitas mapeadas, enquanto países como a França possuem apenas 2.700. Se criar o peso da aresta somando a quantidade absoluta de ingredientes em comum, os EUA vão parecer conectados a todos os outros países apenas por terem um grande volume de dados. 
