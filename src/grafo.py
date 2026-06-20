@@ -21,8 +21,10 @@ import math
 import json
 from collections import defaultdict
 import os
+from pathlib import Path
 
-CSV_PATH = "~/Trabalho_EDA-2/data/processed/culinarydb_arestas.csv" # Caminho para o dataset
+BASE_DIR = Path(__file__).resolve().parent.parent
+CSV_PATH     = BASE_DIR / "data" / "processed" / "culinarydb_arestas.csv" # Caminho para o dataset
 MAX_INGREDIENT_FREQ = 0.20   # Problema 1: remove ingredientes em >20% das receitas
 MIN_INGREDIENT_USES = 3      # remove ingredientes raros (<=2 usos globais)
 
@@ -129,8 +131,8 @@ print(f"   Vértices: {total_vertices} ({len(vertices_region)} regiões + {len(v
 print(f"   Arestas:  {total_edges:,} (bidirecionais → {total_edges*2:,} entradas na lista)")
 
 # salvar grafo e metadados para análises futuras (e.g. centralidade, comunidades, etc)
-output_edges  = os.path.expanduser("~/Trabalho_EDA-2/data/processed/arestas_com_peso.csv")
-output_meta   = os.path.expanduser("~/Trabalho_EDA-2/data/processed/metadados_grafo.json")
+output_edges  = BASE_DIR / "data" / "processed" / "arestas_com_peso.csv"
+output_meta   = BASE_DIR / "data" / "processed" / "metadados_grafo.json"
 
 os.makedirs(os.path.expanduser("~/Trabalho_EDA-2/data/processed"), exist_ok=True)
 
