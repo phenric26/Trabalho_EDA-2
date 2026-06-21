@@ -7,6 +7,8 @@ requires-python = ">=3.13"
 dependencies = [
     "click>=8.4.1",
     "e>=1.4.5",
+    "matplotlib>=3.11.0",
+    "networkx>=3.6.1",
     "pandas>=3.0.3",
     "pip>=26.1.2",
     "spacy>=3.8.13",
