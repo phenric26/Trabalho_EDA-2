@@ -11,7 +11,8 @@ import networkx as nx
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "src"))
 from grafo import vertices_region
 from similaridade import (
-    matriz_jaccard, grafo_similaridade, familias_culinarias, LIMIAR_PADRAO,
+    matriz_jaccard, grafo_similaridade, familias_culinarias,
+    LIMIAR_PADRAO, TOP_K_ASSINATURA,
 )
 
 OUT_DIR = os.path.join(os.path.dirname(__file__), "data", "output")
@@ -40,8 +41,8 @@ def _ordem_e_cores(cliques):
     return ordem, cor
 
 
-def _painel_heatmap(ax, ordem):
-    M = matriz_jaccard()
+def _painel_heatmap(ax, ordem, top_k=TOP_K_ASSINATURA):
+    M = matriz_jaccard(top_k)
     Mord = [[M[i][j] for j in ordem] for i in ordem]
     rotulos = [vertices_region[i] for i in ordem]
 
@@ -66,8 +67,8 @@ def _posicoes_circulares(ordem):
     return pos
 
 
-def _painel_grafo(ax, ordem, cor, limiar):
-    g = grafo_similaridade(limiar)
+def _painel_grafo(ax, ordem, cor, limiar, top_k=TOP_K_ASSINATURA):
+    g = grafo_similaridade(limiar, top_k)
     G = nx.Graph()
     G.add_nodes_from(range(len(vertices_region)))
     for v, vizinhos in g.items():
@@ -94,14 +95,14 @@ def _painel_grafo(ax, ordem, cor, limiar):
     ax.axis("off")
 
 
-def gerar(limiar=LIMIAR_PADRAO):
-    cliques, _ = familias_culinarias(limiar)
+def gerar(limiar=LIMIAR_PADRAO, top_k=TOP_K_ASSINATURA):
+    cliques, _ = familias_culinarias(limiar, top_k)
     ordem, cor = _ordem_e_cores(cliques)
     familias = [c for c in cliques if len(c) >= 2]
 
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(18, 8.5))
-    _painel_heatmap(ax1, ordem)
-    _painel_grafo(ax2, ordem, cor, limiar)
+    _painel_heatmap(ax1, ordem, top_k)
+    _painel_grafo(ax2, ordem, cor, limiar, top_k)
     fig.tight_layout()
 
     os.makedirs(OUT_DIR, exist_ok=True)
@@ -115,8 +116,9 @@ def gerar(limiar=LIMIAR_PADRAO):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--limiar", type=float, default=LIMIAR_PADRAO)
+    ap.add_argument("--top-k", type=int, default=TOP_K_ASSINATURA)
     args = ap.parse_args()
-    gerar(args.limiar)
+    gerar(args.limiar, args.top_k)
 
 
 if __name__ == "__main__":
