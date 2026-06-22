@@ -8,9 +8,12 @@ import math
 import matplotlib.pyplot as plt
 import networkx as nx
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "src"))
-from grafo import vertices_region
-from similaridade import (
+sys.path.insert(
+    0,
+    os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+)
+from src.grafo import vertices_region
+from src.similaridade import (
     matriz_jaccard, grafo_similaridade, familias_culinarias, LIMIAR_PADRAO,
 )
 

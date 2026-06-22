@@ -2,8 +2,8 @@
 
 import argparse
 
-from grafo import graph, vertices_region
-from clique import encontrar_cliques_maximos
+from src.grafo import graph, vertices_region
+from src.clique import encontrar_cliques_maximos
 
 LIMIAR_PADRAO = 0.20
 TOP_K_ASSINATURA = 30
