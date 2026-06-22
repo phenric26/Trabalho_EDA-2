@@ -157,29 +157,41 @@ def rodar_projecao(nome_projecao, descricao_clique, lado_a_idx, graph,
 def main():
     print("=== Pipeline do Projeto Trabalho_EDA-2 ===")
 
-    print("\n[Passo 1] Construindo e carregando o grafo bipartido (Região <-> Ingrediente)...")
+    print(f"\n\n{BOLD}{GREEN}Construindo e carregando o grafo bipartido (Região <-> Ingrediente)...{RESET}")
     from src.grafo import graph, region_idx, ing_idx
 
-    print(f"\n{BOLD}{GREEN} ### [BFS] ###{RESET}")
+    print(f"\n\n{BOLD}{YELLOW} >> Grafo construído e carregado.{RESET}")
 
-    # inicio = next(iter(region_idx.values()))
-    print(f"\n{CYAN}Escolha a região inicial do BFS:{RESET}\n")
+    print(f"\n{BOLD}{GREEN} ### BFS ###{RESET}")
 
-    regioes = list(region_idx.keys())
+    print(f"\n{CYAN}Escolha o tipo de vértice inicial do BFS:{RESET}\n")
+    print("0 - Região")
+    print("1 - Ingrediente")
 
-    for i, nome in enumerate(regioes):
-        print(f"{i} - {nome}")
+    tipo_escolha = int(input("\nDigite o tipo (0 ou 1): "))
 
-    escolha = int(input("\nDigite o número da região: "))
-
-    if escolha < 0 or escolha >= len(regioes):
+    if tipo_escolha not in (0, 1):
         raise ValueError("Escolha inválida!")
 
-    nome_regiao = regioes[escolha]
-    inicio = region_idx[nome_regiao]
+    fonte_idx = region_idx if tipo_escolha == 0 else ing_idx
+    rotulo = "região" if tipo_escolha == 0 else "ingrediente"
 
-    print(f"\n[BFS] Região escolhida: {nome_regiao}")
+    print(f"\n{CYAN}Escolha o {rotulo} inicial do BFS:{RESET}\n")
 
+    nomes_fonte = list(fonte_idx.keys())
+
+    for i, nome in enumerate(nomes_fonte):
+        print(f"{i} - {nome}")
+
+    escolha = int(input(f"\nDigite o número do {rotulo}: "))
+
+    if escolha < 0 or escolha >= len(nomes_fonte):
+        raise ValueError("Escolha inválida!")
+
+    nome_escolhido = nomes_fonte[escolha]
+    inicio = fonte_idx[nome_escolhido]
+
+    print(f"\n[BFS] {rotulo.capitalize()} escolhida: {RED}{nome_escolhido}{RESET}")
     distancias, pais = bfs(graph, inicio)
 
     print(f"   Vértices alcançados: {len(distancias)}")
@@ -204,6 +216,11 @@ def main():
         for v in camadas[d][:10]:
             nome = id_para_nome.get(v, f"Nó {v}")
             print(f"     {nome}")
+
+    
+    print(f"\n{BOLD}{GREEN} ### BFS concluído ###{RESET}")
+
+    print(f"\n\n{BOLD}{GREEN} ### Clique ###{RESET}")
 
 
     print(f"\n\n  Grafo bipartido carregado: {len(region_idx)} regiões, "
