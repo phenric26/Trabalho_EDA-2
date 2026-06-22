@@ -1,10 +1,7 @@
 """Similaridade de Jaccard entre regiões e detecção de famílias por clique."""
 
-import sys
-import os
 import argparse
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "src"))
 from grafo import graph, vertices_region
 from clique import encontrar_cliques_maximos
 

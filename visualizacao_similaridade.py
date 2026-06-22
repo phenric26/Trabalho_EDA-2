@@ -10,7 +10,7 @@ import networkx as nx
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "src"))
 from grafo import vertices_region
-from analise_similaridade import (
+from similaridade import (
     matriz_jaccard, grafo_similaridade, familias_culinarias, LIMIAR_PADRAO,
 )
 
