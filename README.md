@@ -32,6 +32,18 @@ A partir desse grafo bipartido, o sistema realiza três tipos de análise:
 
 3. **Busca de cliques máximos (Bron-Kerbosch)** — aplicada sobre os grafos projetados, identificando grupos de regiões ou ingredientes mutuamente relacionados entre si.
 
+## Decisões Arquiteturais e Estruturas de Dados
+
+* **Representação do Grafo (Lista de Adjacências):** O grafo bipartido (Região ↔ Ingrediente) e suas projeções foram implementados utilizando dicionários/listas de adjacência.
+  * *Justificativa Técnica:* Como a relação entre culinárias e ingredientes mundiais é esparsa (nem toda região usa todos os ingredientes), uma Matriz de Adjacência desperdiçaria memória de forma ineficiente. A lista de adjacência otimiza o uso de memória para $O(V + E)$ e permite iterações extremamente rápidas sobre os vizinhos de um nó.
+* **Estrutura de Dados Adicional (Fila/Queue):** Implementada de forma modular (`src/fila.py`) e utilizada como motor principal do algoritmo de Busca em Largura (BFS).
+  * *Justificativa Técnica:* A estrutura clássica de Fila (FIFO - *First In, First Out*) é o requisito matemático necessário para garantir a correta varredura por camadas (níveis de distância) da BFS. Ela garante operações de enfileirar e desenfileirar em tempo $O(1)$, mantendo a complexidade total da busca eficiente.
+* **Modelagem de Pesos (TF-IDF):** As arestas do grafo não indicam apenas a presença bruta de um ingrediente, mas o seu peso cultural relativo calculado via TF-IDF (*Term Frequency-Inverse Document Frequency*). Isso resolve o problema de ingredientes super-comuns (como "sal" e "água") dominarem as similaridades, destacando os ingredientes que são verdadeiras assinaturas regionais.
+* **Complexidade dos Algoritmos Implementados:**
+  * **BFS:** $O(V + E)$, garantindo percurso rápido e controle exato de camadas de separação.
+  * **Similaridade de Cosseno:** Aplicada na projeção para criar o grafo unipartido, calculando a distância vetorial baseada em pesos de forma eficiente.
+  * **Bron-Kerbosch (Cliques Máximos):** Algoritmo de *backtracking* otimizado utilizado nos grafos unipartidos para encontrar componentes completa e fortemente conexos ("panelinhas" culturais incontestáveis).
+
 ## Estrutura do repositório
 
 ```
