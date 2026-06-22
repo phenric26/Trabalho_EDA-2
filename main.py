@@ -1,10 +1,20 @@
 from src.clique import encontrar_cliques_maximos
+from src.bfs import bfs, reconstruir_caminho
+from collections import defaultdict
 
 PERCENTIL_REGIAO = 0.10        # mantém só o top 10% das similaridades região-região
 PERCENTIL_INGREDIENTE = 0.01   # mantém só o top 1% das similaridades ingrediente-ingrediente
 MAX_CLIQUES_EXIBIDOS = 8       # quantos cliques (os maiores) imprimir por projeção
 MAX_NOMES_POR_CLIQUE = 4       # quantos nomes mostrar dentro de cada clique
 
+RESET = "\033[0m"
+BOLD = "\033[1m"
+
+RED = "\033[31m"
+GREEN = "\033[32m"
+YELLOW = "\033[33m"
+BLUE = "\033[34m"
+CYAN = "\033[36m"
 
 def construir_mapa_pesos(vertice_id, graph):
     """Converte a lista de adjacência [(vizinho, peso), ...] de um vértice
@@ -150,13 +160,53 @@ def main():
     print("\n[Passo 1] Construindo e carregando o grafo bipartido (Região <-> Ingrediente)...")
     from src.grafo import graph, region_idx, ing_idx
 
+    print(f"\n{BOLD}{GREEN} ### [BFS] ###{RESET}")
+
+    # inicio = next(iter(region_idx.values()))
+    print(f"\n{CYAN}Escolha a região inicial do BFS:{RESET}\n")
+
+    regioes = list(region_idx.keys())
+
+    for i, nome in enumerate(regioes):
+        print(f"{i} - {nome}")
+
+    escolha = int(input("\nDigite o número da região: "))
+
+    if escolha < 0 or escolha >= len(regioes):
+        raise ValueError("Escolha inválida!")
+
+    nome_regiao = regioes[escolha]
+    inicio = region_idx[nome_regiao]
+
+    print(f"\n[BFS] Região escolhida: {nome_regiao}")
+
+    distancias, pais = bfs(graph, inicio)
+
+    print(f"   Vértices alcançados: {len(distancias)}")
+
+# agrupa por camada (distância)
+    camadas = defaultdict(list)
+
+    for v, d in distancias.items():
+        camadas[d].append(v)
+
     id_para_nome = {}
     for reg_nome, idx in region_idx.items():
         id_para_nome[idx] = f"Região: {reg_nome.upper()}"
     for ing_nome, idx in ing_idx.items():
         id_para_nome[idx] = f"Ingrediente: {ing_nome}"
 
-    print(f"   Grafo bipartido carregado: {len(region_idx)} regiões, "
+    print("\n   Camadas BFS:")
+
+    for d in sorted(camadas.keys()):
+        print(f"\n   Distância {d} ({len(camadas[d])} nós):")
+
+        for v in camadas[d][:10]:
+            nome = id_para_nome.get(v, f"Nó {v}")
+            print(f"     {nome}")
+
+
+    print(f"\n\n  Grafo bipartido carregado: {len(region_idx)} regiões, "
           f"{len(ing_idx)} ingredientes.")
 
     print("\n[Aviso] Esse grafo é BIPARTIDO (só existem arestas Região<->Ingrediente).")

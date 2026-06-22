@@ -17,7 +17,7 @@ import json
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from src.grafo import graph, region_idx, ing_idx, vertices_region, vertices_ingredient
-from src.fila.bfs import bfs, reconstruir_caminho
+from bfs import bfs, reconstruir_caminho
 
 # ── rodar BFS a partir de todas as regiões ────────────────────────────────── #
 

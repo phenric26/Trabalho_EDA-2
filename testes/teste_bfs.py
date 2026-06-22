@@ -19,7 +19,7 @@ import os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "src"))
 
 from grafo import graph, region_idx, ing_idx, vertices_region, vertices_ingredient
-from fila.bfs import bfs, reconstruir_caminho
+from bfs import bfs, reconstruir_caminho
 
 
 # ── helpers de exibição ────────────────────────────────────────────────────── #
