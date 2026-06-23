@@ -11,5 +11,6 @@ dependencies = [
     "networkx>=3.6.1",
     "pandas>=3.0.3",
     "pip>=26.1.2",
+    "pyside6>=6.11.1",
     "spacy>=3.8.13",
 ]
