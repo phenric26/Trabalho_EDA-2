@@ -30,7 +30,8 @@ Decisão de projeto — ordenação por peso TF-IDF:
     manter a distância em arestas é mais útil.
 """
 
-from .fila import Fila
+from fila.fila import Fila
+
 
 def bfs(graph: dict, inicio: int) -> tuple[dict, dict]:
     """

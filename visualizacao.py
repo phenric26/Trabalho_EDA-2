@@ -15,12 +15,8 @@ import networkx as nx
 import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
 
-sys.path.insert(
-    0,
-    os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-)
-
-from src.grafo import (  # noqa: E402
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "src"))
+from grafo import (  # noqa: E402
     graph, region_idx, vertices_region, vertices_ingredient
 )
 

@@ -14,6 +14,13 @@ Estrutura do grafo:
   Vértices: Região  +  Ingrediente
   Arestas : Região <-> Ingrediente
   Peso    : TF-IDF  (diz o quão exclusivo esse ingrediente é para essa região)
+
+Uso:
+  - como módulo (`from grafo import graph, region_idx, ...`): a construção do
+    grafo roda no import e popula os símbolos públicos, SEM imprimir nem gravar
+    arquivos (importar é silencioso e sem efeito colateral em disco).
+  - como script (`python3 src/grafo.py`): além de construir, imprime o resumo
+    e grava data/processed/{arestas_com_peso.csv, metadados_grafo.json}.
 """
 
 import pandas as pd
@@ -29,16 +36,13 @@ MAX_INGREDIENT_FREQ = 0.20   # Problema 1: remove ingredientes em >20% das recei
 MIN_INGREDIENT_USES = 3      # remove ingredientes raros (<=2 usos globais)
 
 
-print("Lendo arquivo .csv do dataset")
+# ── leitura e limpeza ────────────────────────────────────────────────────────
 df = pd.read_csv(CSV_PATH)
 df.columns = ["recipe_id", "ingredient", "region"]
 df["ingredient"] = df["ingredient"].str.strip().str.lower()
 df["region"]     = df["region"].str.strip().str.lower()
 
 total_recipes = df["recipe_id"].nunique()
-print(f"   {len(df):,} linhas | {total_recipes:,} receitas | "
-      f"{df['region'].nunique()} regiões | {df['ingredient'].nunique()} ingredientes")
-
 
 # Problema 1: filtrar ingredientes onipresentes
 # Conta em quantas receitas cada ingrediente aparece (independente da região )
@@ -49,19 +53,9 @@ ubiquitous = set(recipes_per_ingredient[recipes_per_ingredient > ubiquitous_thre
 rare        = set(recipes_per_ingredient[recipes_per_ingredient <= MIN_INGREDIENT_USES].index)
 removed = ubiquitous | rare
 
-print(f"\n Problema 1 — ingredientes removidos:")
-print(f"   Onipresentes (>{MAX_INGREDIENT_FREQ*100:.0f}% das receitas): {len(ubiquitous)}")
-for ing in sorted(ubiquitous, key=lambda x: -recipes_per_ingredient[x]):
-    pct = recipes_per_ingredient[ing] / total_recipes * 100
-    print(f"     - {ing}: {recipes_per_ingredient[ing]:,} receitas ({pct:.1f}%)")
-print(f"   Raros (<={MIN_INGREDIENT_USES} usos): {len(rare)}")
-print(f"   Total removido: {len(removed)} ingredientes")
-
 df_clean = df[~df["ingredient"].isin(removed)].copy()
-print(f"\n   Base após filtro: {len(df_clean):,} linhas | "
-      f"{df_clean['ingredient'].nunique()} ingredientes restantes")
 
-# Problema 2: peso TF-IDF normalizado por região 
+# Problema 2: peso TF-IDF normalizado por região
 #
 #  Para cada par (região r, ingrediente i):
 #
@@ -73,7 +67,6 @@ print(f"\n   Base após filtro: {len(df_clean):,} linhas | "
 #
 #  peso(r, i) = TF(r, i) × IDF(i)
 #
-print("\n Problema 2 — calculando pesos TF-IDF")
 
 # receitas únicas por região
 total_recipes_per_region = df_clean.groupby("region")["recipe_id"].nunique()
@@ -99,11 +92,7 @@ idf = regions_per_ingredient.apply(lambda x: math.log(N / x) if x > 0 else 0)
 pair_recipes["idf"]    = pair_recipes["ingredient"].map(idf)
 pair_recipes["weight"] = pair_recipes["tf"] * pair_recipes["idf"]
 
-print(f"   {len(pair_recipes):,} arestas com peso TF-IDF calculado")
-
 # ── construção do grafo (listas de adjacência) ───────────────────────────────
-print("\n Construindo grafo")
-
 # Usei dicionários simples para não depender de bibliotecas de grafos
 
 vertices_region     = sorted(df_clean["region"].unique())
@@ -127,50 +116,78 @@ for _, row in pair_recipes.iterrows():
 total_vertices = len(vertices_region) + len(vertices_ingredient)
 total_edges    = len(pair_recipes)
 
-print(f"   Vértices: {total_vertices} ({len(vertices_region)} regiões + {len(vertices_ingredient)} ingredientes)")
-print(f"   Arestas:  {total_edges:,} (bidirecionais → {total_edges*2:,} entradas na lista)")
 
-# salvar grafo e metadados para análises futuras (e.g. centralidade, comunidades, etc)
-output_edges  = BASE_DIR / "data" / "processed" / "arestas_com_peso.csv"
-output_meta   = BASE_DIR / "data" / "processed" / "metadados_grafo.json"
+def imprimir_resumo():
+    """Imprime o resumo da construção (só quando rodado como script)."""
+    print("Lendo arquivo .csv do dataset")
+    print(f"   {len(df):,} linhas | {total_recipes:,} receitas | "
+          f"{df['region'].nunique()} regiões | {df['ingredient'].nunique()} ingredientes")
 
-os.makedirs(os.path.expanduser("~/Trabalho_EDA-2/data/processed"), exist_ok=True)
+    print(f"\n Problema 1 — ingredientes removidos:")
+    print(f"   Onipresentes (>{MAX_INGREDIENT_FREQ*100:.0f}% das receitas): {len(ubiquitous)}")
+    for ing in sorted(ubiquitous, key=lambda x: -recipes_per_ingredient[x]):
+        pct = recipes_per_ingredient[ing] / total_recipes * 100
+        print(f"     - {ing}: {recipes_per_ingredient[ing]:,} receitas ({pct:.1f}%)")
+    print(f"   Raros (<={MIN_INGREDIENT_USES} usos): {len(rare)}")
+    print(f"   Total removido: {len(removed)} ingredientes")
+    print(f"\n   Base após filtro: {len(df_clean):,} linhas | "
+          f"{df_clean['ingredient'].nunique()} ingredientes restantes")
 
-# CSV de arestas (pronto para carregar em qualquer outro módulo)
-pair_recipes[["region", "ingredient", "count", "tf", "idf", "weight"]].to_csv(
-    output_edges, index=False
-)
+    print("\n Problema 2 — calculando pesos TF-IDF")
+    print(f"   {len(pair_recipes):,} arestas com peso TF-IDF calculado")
 
-# metadados do grafo
-meta = {
-    "total_vertices": total_vertices,
-    "total_regions":  len(vertices_region),
-    "total_ingredients": len(vertices_ingredient),
-    "total_edges": total_edges,
-    "removed_ubiquitous": sorted(ubiquitous),
-    "max_ingredient_freq_threshold": MAX_INGREDIENT_FREQ,
-    "min_ingredient_uses_threshold": MIN_INGREDIENT_USES,
-    "regions": vertices_region,
-    "top10_edges_by_weight": (
-        pair_recipes.nlargest(10, "weight")[["region","ingredient","weight"]]
-        .to_dict(orient="records")
+    print("\n Construindo grafo")
+    print(f"   Vértices: {total_vertices} ({len(vertices_region)} regiões + {len(vertices_ingredient)} ingredientes)")
+    print(f"   Arestas:  {total_edges:,} (bidirecionais → {total_edges*2:,} entradas na lista)")
+
+    # top ingredientes por região
+    print("\n Top 5 ingredientes por peso TF-IDF (amostra de regiões):")
+    sample_regions = ["usa", "italy", "japan", "mexico", "india"]
+    for reg in sample_regions:
+        if reg not in region_idx:
+            continue
+        top = (pair_recipes[pair_recipes["region"] == reg]
+               .nlargest(5, "weight")[["ingredient", "weight"]])
+        print(f"\n  {reg.upper()}:")
+        for _, r in top.iterrows():
+            print(f"    {r['ingredient']:<30} tfidf={r['weight']:.4f}")
+
+
+def salvar_artefatos():
+    """Grava o grafo e os metadados em data/processed (só quando rodado como script)."""
+    output_edges  = BASE_DIR / "data" / "processed" / "arestas_com_peso.csv"
+    output_meta   = BASE_DIR / "data" / "processed" / "metadados_grafo.json"
+
+    os.makedirs(output_edges.parent, exist_ok=True)
+
+    # CSV de arestas (pronto para carregar em qualquer outro módulo)
+    pair_recipes[["region", "ingredient", "count", "tf", "idf", "weight"]].to_csv(
+        output_edges, index=False
     )
-}
-with open(output_meta, "w") as f:
-    json.dump(meta, f, indent=2, ensure_ascii=False)
 
-print(f"\n Dados salvos:")
-print(f"   {output_edges}")
-print(f"   {output_meta}")
+    # metadados do grafo
+    meta = {
+        "total_vertices": total_vertices,
+        "total_regions":  len(vertices_region),
+        "total_ingredients": len(vertices_ingredient),
+        "total_edges": total_edges,
+        "removed_ubiquitous": sorted(ubiquitous),
+        "max_ingredient_freq_threshold": MAX_INGREDIENT_FREQ,
+        "min_ingredient_uses_threshold": MIN_INGREDIENT_USES,
+        "regions": vertices_region,
+        "top10_edges_by_weight": (
+            pair_recipes.nlargest(10, "weight")[["region","ingredient","weight"]]
+            .to_dict(orient="records")
+        )
+    }
+    with open(output_meta, "w") as f:
+        json.dump(meta, f, indent=2, ensure_ascii=False)
 
-# top ingredientes por região 
-print("\n Top 5 ingredientes por peso TF-IDF (amostra de regiões):")
-sample_regions = ["usa", "italy", "japan", "mexico", "india"]
-for reg in sample_regions:
-    if reg not in region_idx:
-        continue
-    top = (pair_recipes[pair_recipes["region"] == reg]
-           .nlargest(5, "weight")[["ingredient", "weight"]])
-    print(f"\n  {reg.upper()}:")
-    for _, r in top.iterrows():
-        print(f"    {r['ingredient']:<30} tfidf={r['weight']:.4f}")
+    print(f"\n Dados salvos:")
+    print(f"   {output_edges}")
+    print(f"   {output_meta}")
+
+
+if __name__ == "__main__":
+    imprimir_resumo()
+    salvar_artefatos()

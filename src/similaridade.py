@@ -2,8 +2,8 @@
 
 import argparse
 
-from src.grafo import graph, vertices_region
-from src.clique import encontrar_cliques_maximos
+from grafo import graph, vertices_region
+from clique import encontrar_cliques_maximos
 
 LIMIAR_PADRAO = 0.20
 TOP_K_ASSINATURA = 30
@@ -27,15 +27,15 @@ def jaccard(a, b):
     return len(a & b) / uniao if uniao else 0.0
 
 
-def matriz_jaccard():
-    sets = conjuntos_de_ingredientes()
+def matriz_jaccard(top_k=TOP_K_ASSINATURA):
+    sets = conjuntos_de_ingredientes(top_k)
     return [[jaccard(sets[i], sets[j]) for j in range(N_REGIOES)]
             for i in range(N_REGIOES)]
 
 
-def grafo_similaridade(limiar=LIMIAR_PADRAO):
+def grafo_similaridade(limiar=LIMIAR_PADRAO, top_k=TOP_K_ASSINATURA):
     # devolve no formato {id: [(vizinho, peso), ...]} consumido por encontrar_cliques_maximos
-    sets = conjuntos_de_ingredientes()
+    sets = conjuntos_de_ingredientes(top_k)
     g = {i: [] for i in range(N_REGIOES)}
     for i in range(N_REGIOES):
         for j in range(i + 1, N_REGIOES):
@@ -47,8 +47,8 @@ def grafo_similaridade(limiar=LIMIAR_PADRAO):
     return g
 
 
-def familias_culinarias(limiar=LIMIAR_PADRAO):
-    g = grafo_similaridade(limiar)
+def familias_culinarias(limiar=LIMIAR_PADRAO, top_k=TOP_K_ASSINATURA):
+    g = grafo_similaridade(limiar, top_k)
     cliques = encontrar_cliques_maximos(g)
     cliques = sorted((sorted(c) for c in cliques), key=len, reverse=True)
     return cliques, g

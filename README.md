@@ -76,24 +76,18 @@ Dessa forma, os dados textuais são transformados em uma estrutura de grafo adeq
 
 ```
 .
-├── main.py
-├── analises/
-│   ├── data/
-│   │   └── output/
-│   │       ├── panorama_bipartido.png
-│   │       ├── regiao_italy.png
-│   │       ├── similaridade_regioes.png
-│   │       └── top_arestas.png 
-│   ├── gerar_visualizacao_bfs.py
-│   ├── visualizacao_similaridade.py
-│   └── visualizacao.py 
+├── main.py                       # entrypoint: pipeline interativo (BFS + cliques) + gera o relatório
+├── visualizacao.py               # desenho do grafo bipartido (só matplotlib/networkx)
+├── visualizacao_similaridade.py  # desenho do heatmap + grafo de famílias de regiões
+├── gerar_visualizacao_bfs.py     # exporta a visualização do BFS
+├── grafo_culinario.html          # visualização interativa (D3.js) do grafo
 ├── data/
-│   └── processed/
-│       ├── arestas_com_peso.csv
-│       ├── culinarydb_arestas.csv
-│       └── metadados_grafo.json
+│   ├── processed/
+│   │   ├── arestas_com_peso.csv
+│   │   ├── culinarydb_arestas.csv
+│   │   └── metadados_grafo.json
+│   └── output/                   # artefatos gerados (relatorio.md, resultados.json, PNGs)
 ├── slides/
-│   └──             
 ├── src/
 │   ├── normalizacao/
 │   │   ├── entidades.py
@@ -101,30 +95,45 @@ Dessa forma, os dados textuais são transformados em uma estrutura de grafo adeq
 │   │   ├── preparacao.py
 │   │   ├── README.md
 │   │   └── validacao.py
-│   ├── bfs.py          
-│   ├── clique.py          
-│   ├── fila.py          
-│   ├── grafo.py             
-│   └── similaridade.py
+│   ├── fila/                     # estrutura de dados Fila + BFS (pacote)
+│   │   ├── __init__.py
+│   │   ├── fila.py               # Fila (FIFO) sobre lista encadeada
+│   │   └── bfs.py                # Busca em Largura
+│   ├── grafo.py                  # construção do grafo bipartido TF-IDF
+│   ├── clique.py                 # Bron-Kerbosch (cliques máximos)
+│   ├── cosseno.py                # similaridade de cosseno + projeção do grafo
+│   ├── similaridade.py           # Jaccard entre assinaturas de regiões
+│   └── relatorio.py              # orquestra todas as peças e gera o relatório
+├── testes/
+│   └── teste_bfs.py
 ├── .gitignore
-├── main.py  
-├── pyproject.toml        
+├── pyproject.toml
 ├── README.md
 ├── requirements.txt
 └── uv.lock
 ```
 
+> As bibliotecas `matplotlib`/`networkx` são usadas **apenas para desenhar**. Toda
+> medida (TF-IDF, BFS, cliques, Jaccard, cosseno) é calculada pelo código do grupo.
+
 ## Como executar
 
+As dependências de desenho não ficam no Python global; use `uv run`:
+
 ```bash
-python main.py
+uv run python3 main.py                                   # interativo + relatório (defaults)
+uv run python3 main.py --limiar 0.25 --percentil 0.05 --top-k 40
+uv run python3 main.py --sem-interativo                  # pula os prompts do BFS
 ```
 
-O programa solicitará interativamente:
+O programa solicita interativamente:
 1. O tipo de vértice inicial do BFS (região ou ingrediente);
 2. O vértice específico dentro do tipo escolhido.
 
-Em seguida, o pipeline executa automaticamente:
+Em seguida, o pipeline executa:
 - BFS a partir do vértice escolhido, exibindo as camadas de distância;
-- Projeção Região-Região e busca de cliques máximos;
-- Projeção Ingrediente-Ingrediente e busca de cliques máximos.tuamente relacionados entre si.
+- Projeção Região-Região e busca de cliques máximos (Bron-Kerbosch);
+- Projeção Ingrediente-Ingrediente e busca de cliques máximos.
+
+Ao final, gera o **relatório consolidado** em `data/output/relatorio.md` (com as
+figuras embutidas) e os dados brutos em `data/output/resultados.json`.
