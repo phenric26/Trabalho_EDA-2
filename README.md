@@ -32,6 +32,34 @@ A partir desse grafo bipartido, o sistema realiza três tipos de análise:
 
 3. **Busca de cliques máximos (Bron-Kerbosch)** — aplicada sobre os grafos projetados, identificando grupos de regiões ou ingredientes mutuamente relacionados entre si.
 
+## Problema
+
+A culinária de diferentes regiões do mundo pode ser caracterizada pelos ingredientes utilizados em suas receitas. Entretanto, identificar relações entre cozinhas distintas ou ingredientes culturalmente associados não é trivial quando analisamos milhares de receitas individualmente.
+
+Este trabalho propõe modelar essas relações por meio de grafos, utilizando técnicas de Processamento de Linguagem Natural (PLN) para extrair, normalizar e ponderar ingredientes a partir de dados textuais do dataset CulinaryDB.
+
+A partir dessa modelagem, buscamos responder perguntas como:
+
+- Quais regiões possuem culinárias semelhantes?
+- Quais ingredientes caracterizam uma determinada região?
+- Existem grupos de regiões fortemente relacionadas?
+- Existem ingredientes que aparecem em padrões de uso semelhantes?
+
+## Aplicação de PLN
+
+Embora o foco principal do trabalho seja a modelagem em grafos, técnicas de Processamento de Linguagem Natural foram empregadas durante a preparação dos dados.
+
+As etapas incluem:
+
+- Normalização textual dos ingredientes;
+- Remoção de inconsistências e duplicidades;
+- Tratamento de ruídos linguísticos;
+- Representação vetorial utilizando TF-IDF;
+- Construção das relações semânticas entre regiões e ingredientes.
+
+Dessa forma, os dados textuais são transformados em uma estrutura de grafo adequada para análise.
+
+
 ## Decisões Arquiteturais e Estruturas de Dados
 
 * **Representação do Grafo (Lista de Adjacências):** O grafo bipartido (Região ↔ Ingrediente) e suas projeções foram implementados utilizando dicionários/listas de adjacência.
