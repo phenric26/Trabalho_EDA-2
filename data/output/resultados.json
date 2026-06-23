@@ -1,0 +1,1508 @@
+{
+  "parametros": {
+    "limiar_jaccard": 0.2,
+    "percentil_cosseno": 0.1,
+    "top_k": 30
+  },
+  "panorama": {
+    "n_regioes": 26,
+    "n_ingredientes": 666,
+    "n_arestas": 7875,
+    "densidade_bipartida": 0.4548,
+    "grau_regiao_min": 49,
+    "grau_regiao_max": 623,
+    "grau_regiao_medio": 302.9,
+    "top_exclusivos": [
+      {
+        "regiao": "indian subcontinent",
+        "ingrediente": "asafoetida",
+        "tfidf": 0.3256
+      },
+      {
+        "regiao": "indian subcontinent",
+        "ingrediente": "mustard oil",
+        "tfidf": 0.317
+      },
+      {
+        "regiao": "indian subcontinent",
+        "ingrediente": "ghee",
+        "tfidf": 0.317
+      },
+      {
+        "regiao": "greece",
+        "ingrediente": "cheese feta",
+        "tfidf": 0.1931
+      },
+      {
+        "regiao": "misc.: central america",
+        "ingrediente": "burrito",
+        "tfidf": 0.1832
+      },
+      {
+        "regiao": "korea",
+        "ingrediente": "sesame",
+        "tfidf": 0.1639
+      },
+      {
+        "regiao": "misc.: belgian",
+        "ingrediente": "cheese gruyere",
+        "tfidf": 0.1572
+      },
+      {
+        "regiao": "japan",
+        "ingrediente": "sake",
+        "tfidf": 0.1547
+      },
+      {
+        "regiao": "indian subcontinent",
+        "ingrediente": "curry leaf",
+        "tfidf": 0.1515
+      },
+      {
+        "regiao": "japan",
+        "ingrediente": "bonito",
+        "tfidf": 0.1462
+      }
+    ],
+    "top_transversais": [
+      {
+        "ingrediente": "baking powder",
+        "regioes": 26
+      },
+      {
+        "ingrediente": "carrot",
+        "regioes": 26
+      },
+      {
+        "ingrediente": "chicken",
+        "regioes": 26
+      },
+      {
+        "ingrediente": "cinnamon",
+        "regioes": 26
+      },
+      {
+        "ingrediente": "clove",
+        "regioes": 26
+      },
+      {
+        "ingrediente": "cream",
+        "regioes": 26
+      },
+      {
+        "ingrediente": "lemon",
+        "regioes": 26
+      },
+      {
+        "ingrediente": "lemon juice",
+        "regioes": 26
+      },
+      {
+        "ingrediente": "milk",
+        "regioes": 26
+      },
+      {
+        "ingrediente": "pepper bell",
+        "regioes": 26
+      }
+    ]
+  },
+  "assinaturas": {
+    "africa": [
+      {
+        "ingrediente": "couscou",
+        "tfidf": 0.088
+      },
+      {
+        "ingrediente": "chickpea",
+        "tfidf": 0.0807
+      },
+      {
+        "ingrediente": "harissa",
+        "tfidf": 0.0653
+      },
+      {
+        "ingrediente": "saffron",
+        "tfidf": 0.0388
+      },
+      {
+        "ingrediente": "cumin",
+        "tfidf": 0.0315
+      },
+      {
+        "ingrediente": "turmeric",
+        "tfidf": 0.0309
+      },
+      {
+        "ingrediente": "cilantro",
+        "tfidf": 0.0296
+      },
+      {
+        "ingrediente": "lamb",
+        "tfidf": 0.024
+      }
+    ],
+    "australia & nz": [
+      {
+        "ingrediente": "cheese feta",
+        "tfidf": 0.0239
+      },
+      {
+        "ingrediente": "cheese parmesan",
+        "tfidf": 0.0229
+      },
+      {
+        "ingrediente": "oat",
+        "tfidf": 0.0188
+      },
+      {
+        "ingrediente": "pasta",
+        "tfidf": 0.0185
+      },
+      {
+        "ingrediente": "salad dressing",
+        "tfidf": 0.0177
+      },
+      {
+        "ingrediente": "artichoke",
+        "tfidf": 0.0163
+      },
+      {
+        "ingrediente": "salt pepper",
+        "tfidf": 0.0144
+      },
+      {
+        "ingrediente": "raspberry",
+        "tfidf": 0.0128
+      }
+    ],
+    "british isles": [
+      {
+        "ingrediente": "buttermilk",
+        "tfidf": 0.0336
+      },
+      {
+        "ingrediente": "whiskey",
+        "tfidf": 0.0317
+      },
+      {
+        "ingrediente": "currant",
+        "tfidf": 0.021
+      },
+      {
+        "ingrediente": "baking soda",
+        "tfidf": 0.0191
+      },
+      {
+        "ingrediente": "oat",
+        "tfidf": 0.019
+      },
+      {
+        "ingrediente": "rutabaga",
+        "tfidf": 0.0187
+      },
+      {
+        "ingrediente": "flour",
+        "tfidf": 0.0172
+      },
+      {
+        "ingrediente": "irish  mos",
+        "tfidf": 0.0143
+      }
+    ],
+    "canada": [
+      {
+        "ingrediente": "oat",
+        "tfidf": 0.0402
+      },
+      {
+        "ingrediente": "tart shell",
+        "tfidf": 0.0213
+      },
+      {
+        "ingrediente": "cocoa powder",
+        "tfidf": 0.0166
+      },
+      {
+        "ingrediente": "flax seed",
+        "tfidf": 0.0164
+      },
+      {
+        "ingrediente": "blueberry",
+        "tfidf": 0.0162
+      },
+      {
+        "ingrediente": "barbeque sauce",
+        "tfidf": 0.0153
+      },
+      {
+        "ingrediente": "cheese cream",
+        "tfidf": 0.013
+      },
+      {
+        "ingrediente": "cheese parmesan",
+        "tfidf": 0.0118
+      }
+    ],
+    "caribbean": [
+      {
+        "ingrediente": "plantain french",
+        "tfidf": 0.0713
+      },
+      {
+        "ingrediente": "scotch",
+        "tfidf": 0.0461
+      },
+      {
+        "ingrediente": "rum",
+        "tfidf": 0.0459
+      },
+      {
+        "ingrediente": "lime",
+        "tfidf": 0.0402
+      },
+      {
+        "ingrediente": "mango",
+        "tfidf": 0.0338
+      },
+      {
+        "ingrediente": "coconut milk",
+        "tfidf": 0.0269
+      },
+      {
+        "ingrediente": "cilantro",
+        "tfidf": 0.0258
+      },
+      {
+        "ingrediente": "habanero",
+        "tfidf": 0.0244
+      }
+    ],
+    "china": [
+      {
+        "ingrediente": "sesame",
+        "tfidf": 0.1144
+      },
+      {
+        "ingrediente": "soy sauce",
+        "tfidf": 0.0792
+      },
+      {
+        "ingrediente": "hoisin sauce",
+        "tfidf": 0.0765
+      },
+      {
+        "ingrediente": "chinese five spice",
+        "tfidf": 0.0702
+      },
+      {
+        "ingrediente": "oyster",
+        "tfidf": 0.0644
+      },
+      {
+        "ingrediente": "water chestnut",
+        "tfidf": 0.0639
+      },
+      {
+        "ingrediente": "scallion",
+        "tfidf": 0.0492
+      },
+      {
+        "ingrediente": "peanut oil",
+        "tfidf": 0.041
+      }
+    ],
+    "dach countries": [
+      {
+        "ingrediente": "sauerkraut",
+        "tfidf": 0.1065
+      },
+      {
+        "ingrediente": "caraway",
+        "tfidf": 0.0309
+      },
+      {
+        "ingrediente": "flour",
+        "tfidf": 0.0208
+      },
+      {
+        "ingrediente": "anise",
+        "tfidf": 0.0179
+      },
+      {
+        "ingrediente": "veal",
+        "tfidf": 0.0169
+      },
+      {
+        "ingrediente": "cocoa powder",
+        "tfidf": 0.015
+      },
+      {
+        "ingrediente": "raspberry",
+        "tfidf": 0.015
+      },
+      {
+        "ingrediente": "cheese gruyere",
+        "tfidf": 0.0145
+      }
+    ],
+    "eastern europe": [
+      {
+        "ingrediente": "sauerkraut",
+        "tfidf": 0.0647
+      },
+      {
+        "ingrediente": "dill",
+        "tfidf": 0.0358
+      },
+      {
+        "ingrediente": "beet",
+        "tfidf": 0.0338
+      },
+      {
+        "ingrediente": "caraway",
+        "tfidf": 0.0258
+      },
+      {
+        "ingrediente": "poppy seed",
+        "tfidf": 0.0198
+      },
+      {
+        "ingrediente": "cheese cottage",
+        "tfidf": 0.0195
+      },
+      {
+        "ingrediente": "flour",
+        "tfidf": 0.0179
+      },
+      {
+        "ingrediente": "marjoram",
+        "tfidf": 0.0165
+      }
+    ],
+    "france": [
+      {
+        "ingrediente": "cheese gruyere",
+        "tfidf": 0.0246
+      },
+      {
+        "ingrediente": "chocolate",
+        "tfidf": 0.0172
+      },
+      {
+        "ingrediente": "cocoa butter",
+        "tfidf": 0.0169
+      },
+      {
+        "ingrediente": "shallot",
+        "tfidf": 0.0155
+      },
+      {
+        "ingrediente": "baguette",
+        "tfidf": 0.0155
+      },
+      {
+        "ingrediente": "brandy cognac",
+        "tfidf": 0.0153
+      },
+      {
+        "ingrediente": "armagnac brandy",
+        "tfidf": 0.0153
+      },
+      {
+        "ingrediente": "tarragon",
+        "tfidf": 0.0151
+      }
+    ],
+    "greece": [
+      {
+        "ingrediente": "cheese feta",
+        "tfidf": 0.1931
+      },
+      {
+        "ingrediente": "feta  cheese",
+        "tfidf": 0.0666
+      },
+      {
+        "ingrediente": "phyllo",
+        "tfidf": 0.0483
+      },
+      {
+        "ingrediente": "bread pita",
+        "tfidf": 0.0479
+      },
+      {
+        "ingrediente": "oregano",
+        "tfidf": 0.0386
+      },
+      {
+        "ingrediente": "dill",
+        "tfidf": 0.0371
+      },
+      {
+        "ingrediente": "pita  bread",
+        "tfidf": 0.0287
+      },
+      {
+        "ingrediente": "yogurt",
+        "tfidf": 0.0276
+      }
+    ],
+    "indian subcontinent": [
+      {
+        "ingrediente": "asafoetida",
+        "tfidf": 0.3256
+      },
+      {
+        "ingrediente": "ghee",
+        "tfidf": 0.317
+      },
+      {
+        "ingrediente": "mustard oil",
+        "tfidf": 0.317
+      },
+      {
+        "ingrediente": "curry leaf",
+        "tfidf": 0.1515
+      },
+      {
+        "ingrediente": "sunflower",
+        "tfidf": 0.1435
+      },
+      {
+        "ingrediente": "garam masala",
+        "tfidf": 0.1242
+      },
+      {
+        "ingrediente": "chickpea",
+        "tfidf": 0.1222
+      },
+      {
+        "ingrediente": "ginger garlic paste",
+        "tfidf": 0.1089
+      }
+    ],
+    "italy": [
+      {
+        "ingrediente": "parmesan  cheese",
+        "tfidf": 0.0451
+      },
+      {
+        "ingrediente": "cheese ricotta",
+        "tfidf": 0.0443
+      },
+      {
+        "ingrediente": "cheese parmesan",
+        "tfidf": 0.0414
+      },
+      {
+        "ingrediente": "pasta",
+        "tfidf": 0.0377
+      },
+      {
+        "ingrediente": "mozzarella  cheese",
+        "tfidf": 0.0286
+      },
+      {
+        "ingrediente": "lasagna",
+        "tfidf": 0.0286
+      },
+      {
+        "ingrediente": "basil",
+        "tfidf": 0.0281
+      },
+      {
+        "ingrediente": "cheese mozzarella",
+        "tfidf": 0.0268
+      }
+    ],
+    "japan": [
+      {
+        "ingrediente": "sake",
+        "tfidf": 0.1547
+      },
+      {
+        "ingrediente": "bonito",
+        "tfidf": 0.1462
+      },
+      {
+        "ingrediente": "kombu",
+        "tfidf": 0.12
+      },
+      {
+        "ingrediente": "miso",
+        "tfidf": 0.1135
+      },
+      {
+        "ingrediente": "sesame",
+        "tfidf": 0.0761
+      },
+      {
+        "ingrediente": "wasabi",
+        "tfidf": 0.0664
+      },
+      {
+        "ingrediente": "soy sauce",
+        "tfidf": 0.0611
+      },
+      {
+        "ingrediente": "tofu",
+        "tfidf": 0.0406
+      }
+    ],
+    "korea": [
+      {
+        "ingrediente": "sesame",
+        "tfidf": 0.1639
+      },
+      {
+        "ingrediente": "soy sauce",
+        "tfidf": 0.0721
+      },
+      {
+        "ingrediente": "daikon",
+        "tfidf": 0.0457
+      },
+      {
+        "ingrediente": "scallion",
+        "tfidf": 0.0405
+      },
+      {
+        "ingrediente": "kombu",
+        "tfidf": 0.0359
+      },
+      {
+        "ingrediente": "tofu",
+        "tfidf": 0.0268
+      },
+      {
+        "ingrediente": "soy bean",
+        "tfidf": 0.0219
+      },
+      {
+        "ingrediente": "pear",
+        "tfidf": 0.02
+      }
+    ],
+    "mexico": [
+      {
+        "ingrediente": "taco",
+        "tfidf": 0.1127
+      },
+      {
+        "ingrediente": "tortilla",
+        "tfidf": 0.0837
+      },
+      {
+        "ingrediente": "enchilada",
+        "tfidf": 0.0803
+      },
+      {
+        "ingrediente": "tortilla chip",
+        "tfidf": 0.0753
+      },
+      {
+        "ingrediente": "tequila",
+        "tfidf": 0.0417
+      },
+      {
+        "ingrediente": "oregano mexican",
+        "tfidf": 0.0379
+      },
+      {
+        "ingrediente": "cilantro",
+        "tfidf": 0.0378
+      },
+      {
+        "ingrediente": "corn",
+        "tfidf": 0.0332
+      }
+    ],
+    "middle east": [
+      {
+        "ingrediente": "bulgur",
+        "tfidf": 0.0828
+      },
+      {
+        "ingrediente": "tahini",
+        "tfidf": 0.0711
+      },
+      {
+        "ingrediente": "chickpea",
+        "tfidf": 0.0659
+      },
+      {
+        "ingrediente": "bread pita",
+        "tfidf": 0.0546
+      },
+      {
+        "ingrediente": "couscou",
+        "tfidf": 0.0338
+      },
+      {
+        "ingrediente": "pomegranate",
+        "tfidf": 0.0328
+      },
+      {
+        "ingrediente": "mint",
+        "tfidf": 0.0322
+      },
+      {
+        "ingrediente": "pistachio",
+        "tfidf": 0.0318
+      }
+    ],
+    "misc.: belgian": [
+      {
+        "ingrediente": "cheese gruyere",
+        "tfidf": 0.1572
+      },
+      {
+        "ingrediente": "endive",
+        "tfidf": 0.1147
+      },
+      {
+        "ingrediente": "whiskey",
+        "tfidf": 0.0515
+      },
+      {
+        "ingrediente": "prosciutto",
+        "tfidf": 0.0324
+      },
+      {
+        "ingrediente": "flour",
+        "tfidf": 0.0261
+      },
+      {
+        "ingrediente": "beer",
+        "tfidf": 0.0223
+      },
+      {
+        "ingrediente": "molass",
+        "tfidf": 0.0209
+      },
+      {
+        "ingrediente": "cheese parmesan",
+        "tfidf": 0.0175
+      }
+    ],
+    "misc.: central america": [
+      {
+        "ingrediente": "burrito",
+        "tfidf": 0.1832
+      },
+      {
+        "ingrediente": "oregano mexican",
+        "tfidf": 0.1047
+      },
+      {
+        "ingrediente": "chayote",
+        "tfidf": 0.0758
+      },
+      {
+        "ingrediente": "pie",
+        "tfidf": 0.0758
+      },
+      {
+        "ingrediente": "tequila",
+        "tfidf": 0.0758
+      },
+      {
+        "ingrediente": "cilantro",
+        "tfidf": 0.0613
+      },
+      {
+        "ingrediente": "lime",
+        "tfidf": 0.0613
+      },
+      {
+        "ingrediente": "green chile",
+        "tfidf": 0.0448
+      }
+    ],
+    "misc.: dutch": [
+      {
+        "ingrediente": "treacle",
+        "tfidf": 0.054
+      },
+      {
+        "ingrediente": "meatloaf",
+        "tfidf": 0.0328
+      },
+      {
+        "ingrediente": "currant",
+        "tfidf": 0.0319
+      },
+      {
+        "ingrediente": "apple",
+        "tfidf": 0.0307
+      },
+      {
+        "ingrediente": "flour",
+        "tfidf": 0.0294
+      },
+      {
+        "ingrediente": "pie",
+        "tfidf": 0.0265
+      },
+      {
+        "ingrediente": "sultana",
+        "tfidf": 0.0239
+      },
+      {
+        "ingrediente": "custard",
+        "tfidf": 0.0193
+      }
+    ],
+    "misc.: portugal": [
+      {
+        "ingrediente": "pimenta",
+        "tfidf": 0.0562
+      },
+      {
+        "ingrediente": "bean kidney",
+        "tfidf": 0.0319
+      },
+      {
+        "ingrediente": "kale",
+        "tfidf": 0.0306
+      },
+      {
+        "ingrediente": "port wine",
+        "tfidf": 0.0186
+      },
+      {
+        "ingrediente": "spanish  sage",
+        "tfidf": 0.0172
+      },
+      {
+        "ingrediente": "paprika",
+        "tfidf": 0.0158
+      },
+      {
+        "ingrediente": "haddock",
+        "tfidf": 0.0155
+      },
+      {
+        "ingrediente": "sausage",
+        "tfidf": 0.0152
+      }
+    ],
+    "scandinavia": [
+      {
+        "ingrediente": "lingonberry",
+        "tfidf": 0.0571
+      },
+      {
+        "ingrediente": "herring",
+        "tfidf": 0.0463
+      },
+      {
+        "ingrediente": "cardamom",
+        "tfidf": 0.0373
+      },
+      {
+        "ingrediente": "dill",
+        "tfidf": 0.0279
+      },
+      {
+        "ingrediente": "bread rye",
+        "tfidf": 0.0263
+      },
+      {
+        "ingrediente": "flour",
+        "tfidf": 0.0208
+      },
+      {
+        "ingrediente": "caraway",
+        "tfidf": 0.0204
+      },
+      {
+        "ingrediente": "salmon",
+        "tfidf": 0.0169
+      }
+    ],
+    "south america": [
+      {
+        "ingrediente": "cilantro",
+        "tfidf": 0.026
+      },
+      {
+        "ingrediente": "corn",
+        "tfidf": 0.0245
+      },
+      {
+        "ingrediente": "lime",
+        "tfidf": 0.0224
+      },
+      {
+        "ingrediente": "plantain french",
+        "tfidf": 0.0196
+      },
+      {
+        "ingrediente": "milk condensed",
+        "tfidf": 0.0181
+      },
+      {
+        "ingrediente": "tapioca",
+        "tfidf": 0.0143
+      },
+      {
+        "ingrediente": "dulce de leche",
+        "tfidf": 0.0143
+      },
+      {
+        "ingrediente": "cheese parmesan",
+        "tfidf": 0.0128
+      }
+    ],
+    "south east asia": [
+      {
+        "ingrediente": "lemongras",
+        "tfidf": 0.09
+      },
+      {
+        "ingrediente": "fish",
+        "tfidf": 0.0687
+      },
+      {
+        "ingrediente": "peanut",
+        "tfidf": 0.0508
+      },
+      {
+        "ingrediente": "bean mung",
+        "tfidf": 0.0502
+      },
+      {
+        "ingrediente": "vermicelli",
+        "tfidf": 0.0444
+      },
+      {
+        "ingrediente": "coconut milk",
+        "tfidf": 0.0365
+      },
+      {
+        "ingrediente": "lime",
+        "tfidf": 0.0346
+      },
+      {
+        "ingrediente": "tamarind",
+        "tfidf": 0.0324
+      }
+    ],
+    "spain": [
+      {
+        "ingrediente": "saffron",
+        "tfidf": 0.0698
+      },
+      {
+        "ingrediente": "spanish  sage",
+        "tfidf": 0.0492
+      },
+      {
+        "ingrediente": "pimiento",
+        "tfidf": 0.0243
+      },
+      {
+        "ingrediente": "chickpea",
+        "tfidf": 0.0211
+      },
+      {
+        "ingrediente": "paprika",
+        "tfidf": 0.0186
+      },
+      {
+        "ingrediente": "baguette",
+        "tfidf": 0.0157
+      },
+      {
+        "ingrediente": "prosciutto",
+        "tfidf": 0.0149
+      },
+      {
+        "ingrediente": "mussel",
+        "tfidf": 0.0145
+      }
+    ],
+    "thailand": [
+      {
+        "ingrediente": "lemongras",
+        "tfidf": 0.1058
+      },
+      {
+        "ingrediente": "coconut milk",
+        "tfidf": 0.0924
+      },
+      {
+        "ingrediente": "kaffir beer",
+        "tfidf": 0.0905
+      },
+      {
+        "ingrediente": "peanut",
+        "tfidf": 0.085
+      },
+      {
+        "ingrediente": "fish",
+        "tfidf": 0.0791
+      },
+      {
+        "ingrediente": "peanut butter",
+        "tfidf": 0.0606
+      },
+      {
+        "ingrediente": "lime",
+        "tfidf": 0.0592
+      },
+      {
+        "ingrediente": "paste  tomato",
+        "tfidf": 0.0533
+      }
+    ],
+    "usa": [
+      {
+        "ingrediente": "cajun seasoning",
+        "tfidf": 0.0146
+      },
+      {
+        "ingrediente": "pecan",
+        "tfidf": 0.0141
+      },
+      {
+        "ingrediente": "buttermilk",
+        "tfidf": 0.0138
+      },
+      {
+        "ingrediente": "cheddar  cheese",
+        "tfidf": 0.0123
+      },
+      {
+        "ingrediente": "corn",
+        "tfidf": 0.0112
+      },
+      {
+        "ingrediente": "chocolate",
+        "tfidf": 0.0107
+      },
+      {
+        "ingrediente": "cayenne",
+        "tfidf": 0.0094
+      },
+      {
+        "ingrediente": "cocoa powder",
+        "tfidf": 0.0093
+      }
+    ]
+  },
+  "conectividade": {
+    "grafo_conexo": true,
+    "vertices_alcancados_de_0": 692,
+    "vertices_totais": 692,
+    "diametro_regiao_regiao": 2,
+    "exemplos_ponte": [
+      {
+        "de": "japan",
+        "para": "mexico",
+        "distancia": 2,
+        "ponte": [
+          "sesame"
+        ]
+      },
+      {
+        "de": "italy",
+        "para": "japan",
+        "distancia": 2,
+        "ponte": [
+          "parmesan  cheese"
+        ]
+      },
+      {
+        "de": "indian subcontinent",
+        "para": "france",
+        "distancia": 2,
+        "ponte": [
+          "sunflower"
+        ]
+      },
+      {
+        "de": "scandinavia",
+        "para": "thailand",
+        "distancia": 2,
+        "ponte": [
+          "cardamom"
+        ]
+      }
+    ]
+  },
+  "familias_regioes": {
+    "arestas_jaccard": 21,
+    "arestas_cosseno": 32,
+    "limiar_cosseno_calculado": 0.3513,
+    "familias_jaccard": [
+      [
+        "china",
+        "korea",
+        "south east asia",
+        "thailand"
+      ],
+      [
+        "british isles",
+        "dach countries",
+        "misc.: dutch"
+      ],
+      [
+        "china",
+        "japan",
+        "korea"
+      ],
+      [
+        "dach countries",
+        "eastern europe",
+        "scandinavia"
+      ],
+      [
+        "africa",
+        "middle east"
+      ],
+      [
+        "australia & nz",
+        "greece"
+      ],
+      [
+        "canada",
+        "usa"
+      ],
+      [
+        "caribbean",
+        "south america"
+      ],
+      [
+        "greece",
+        "italy"
+      ],
+      [
+        "greece",
+        "middle east"
+      ],
+      [
+        "mexico",
+        "misc.: central america"
+      ]
+    ],
+    "familias_cosseno": [
+      [
+        "australia & nz",
+        "british isles",
+        "canada",
+        "france",
+        "usa"
+      ],
+      [
+        "australia & nz",
+        "france",
+        "italy",
+        "usa"
+      ],
+      [
+        "china",
+        "south east asia",
+        "thailand"
+      ],
+      [
+        "china",
+        "japan",
+        "korea"
+      ],
+      [
+        "australia & nz",
+        "south america",
+        "usa"
+      ],
+      [
+        "caribbean",
+        "south america",
+        "usa"
+      ],
+      [
+        "africa",
+        "spain"
+      ],
+      [
+        "africa",
+        "middle east"
+      ],
+      [
+        "dach countries",
+        "eastern europe"
+      ],
+      [
+        "australia & nz",
+        "greece"
+      ],
+      [
+        "greece",
+        "middle east"
+      ],
+      [
+        "france",
+        "misc.: belgian"
+      ],
+      [
+        "british isles",
+        "misc.: dutch"
+      ],
+      [
+        "eastern europe",
+        "scandinavia"
+      ],
+      [
+        "eastern europe",
+        "usa"
+      ]
+    ],
+    "cliques_identicos": [
+      [
+        "australia & nz",
+        "greece"
+      ],
+      [
+        "china",
+        "japan",
+        "korea"
+      ],
+      [
+        "africa",
+        "middle east"
+      ],
+      [
+        "greece",
+        "middle east"
+      ]
+    ],
+    "concordancia_arestas_pct": 92.3,
+    "jaccard_de_arestas_pct": 35.9,
+    "arestas_so_jaccard": [
+      [
+        "british isles",
+        "dach countries"
+      ],
+      [
+        "dach countries",
+        "misc.: dutch"
+      ],
+      [
+        "dach countries",
+        "scandinavia"
+      ],
+      [
+        "greece",
+        "italy"
+      ],
+      [
+        "korea",
+        "south east asia"
+      ],
+      [
+        "korea",
+        "thailand"
+      ],
+      [
+        "mexico",
+        "misc.: central america"
+      ]
+    ],
+    "arestas_so_cosseno": [
+      [
+        "africa",
+        "spain"
+      ],
+      [
+        "australia & nz",
+        "british isles"
+      ],
+      [
+        "australia & nz",
+        "canada"
+      ],
+      [
+        "australia & nz",
+        "france"
+      ],
+      [
+        "australia & nz",
+        "italy"
+      ],
+      [
+        "australia & nz",
+        "south america"
+      ],
+      [
+        "australia & nz",
+        "usa"
+      ],
+      [
+        "british isles",
+        "canada"
+      ],
+      [
+        "british isles",
+        "france"
+      ],
+      [
+        "british isles",
+        "usa"
+      ],
+      [
+        "canada",
+        "france"
+      ],
+      [
+        "caribbean",
+        "usa"
+      ],
+      [
+        "eastern europe",
+        "usa"
+      ],
+      [
+        "france",
+        "italy"
+      ],
+      [
+        "france",
+        "misc.: belgian"
+      ],
+      [
+        "france",
+        "usa"
+      ],
+      [
+        "italy",
+        "usa"
+      ],
+      [
+        "south america",
+        "usa"
+      ]
+    ],
+    "clique_asiatico_em_jaccard": true,
+    "clique_asiatico_em_cosseno": false
+  },
+  "familias_ingredientes": {
+    "percentil": 0.01,
+    "limiar_calculado": 0.8459,
+    "n_cliques_total": 473,
+    "n_cliques_grandes": 151,
+    "maior_clique": 32,
+    "exemplos_maiores": [
+      [
+        "amchoor",
+        "asafetida",
+        "asafoetida",
+        "bay laurel",
+        "bean cluster",
+        "bitter gourd",
+        "bread wheaten",
+        "capsicum",
+        "carom seed",
+        "cashew",
+        "chaat masala",
+        "chole masala",
+        "colocasia",
+        "coriander cumin seed powder",
+        "corn grit",
+        "curry leaf",
+        "dal toor",
+        "fenugreek",
+        "garam masala",
+        "ghee",
+        "ginger garlic paste",
+        "kalonji",
+        "mustard oil",
+        "nigella seed",
+        "paneer",
+        "rasam powder",
+        "sambar powder",
+        "sunflower",
+        "tandoori masala",
+        "tandoori paste",
+        "turmeric",
+        "waterchestnut"
+      ],
+      [
+        "amchoor",
+        "asafetida",
+        "asafoetida",
+        "bay laurel",
+        "bean cluster",
+        "bitter gourd",
+        "bread wheaten",
+        "capsicum",
+        "carom seed",
+        "chaat masala",
+        "chole masala",
+        "colocasia",
+        "coriander cumin seed powder",
+        "corn grit",
+        "curry leaf",
+        "dal toor",
+        "fenugreek",
+        "garam masala",
+        "ghee",
+        "ginger garlic paste",
+        "kalonji",
+        "mustard oil",
+        "nigella seed",
+        "paneer",
+        "pea pigeon",
+        "rasam powder",
+        "sambar powder",
+        "sunflower",
+        "tandoori masala",
+        "tandoori paste",
+        "waterchestnut"
+      ],
+      [
+        "amchoor",
+        "asafetida",
+        "asafoetida",
+        "bay laurel",
+        "bean cluster",
+        "bitter gourd",
+        "bottle gourd",
+        "bread wheaten",
+        "capsicum",
+        "carom seed",
+        "chaat masala",
+        "chole masala",
+        "colocasia",
+        "coriander cumin seed powder",
+        "corn grit",
+        "curry leaf",
+        "dal toor",
+        "fenugreek",
+        "garam masala",
+        "ghee",
+        "ginger garlic paste",
+        "kalonji",
+        "mustard oil",
+        "paneer",
+        "rasam powder",
+        "sambar powder",
+        "sunflower",
+        "tandoori masala",
+        "tandoori paste",
+        "waterchestnut"
+      ],
+      [
+        "amchoor",
+        "asafetida",
+        "asafoetida",
+        "bay laurel",
+        "bean cluster",
+        "bitter gourd",
+        "bread wheaten",
+        "capsicum",
+        "carom seed",
+        "chaat masala",
+        "chole masala",
+        "colocasia",
+        "coriander cumin seed powder",
+        "corn grit",
+        "curry leaf",
+        "dal toor",
+        "fenugreek",
+        "garam masala",
+        "ghee",
+        "ginger garlic paste",
+        "kalonji",
+        "mustard oil",
+        "paneer",
+        "rasam powder",
+        "sambar powder",
+        "silver  linden",
+        "sunflower",
+        "tandoori masala",
+        "tandoori paste",
+        "waterchestnut"
+      ],
+      [
+        "cheese provolone",
+        "cheese ricotta",
+        "cheese romano",
+        "curd",
+        "cuttlefish",
+        "fettuccine",
+        "lady finger",
+        "lasagna",
+        "mascarpone",
+        "mozzarella  cheese",
+        "pancetta",
+        "parmesan  cheese",
+        "porcini",
+        "provolone  cheese",
+        "ravioli",
+        "ricotta  cheese",
+        "romano  cheese",
+        "spaghetti"
+      ]
+    ]
+  },
+  "varredura": {
+    "jaccard": [
+      {
+        "limiar": 0.15,
+        "arestas": 34,
+        "familias": 15,
+        "maior": 4
+      },
+      {
+        "limiar": 0.2,
+        "arestas": 21,
+        "familias": 11,
+        "maior": 4
+      },
+      {
+        "limiar": 0.25,
+        "arestas": 7,
+        "familias": 5,
+        "maior": 3
+      },
+      {
+        "limiar": 0.3,
+        "arestas": 5,
+        "familias": 5,
+        "maior": 2
+      }
+    ],
+    "cosseno": [
+      {
+        "percentil": 0.05,
+        "limiar": 0.4297,
+        "arestas": 16,
+        "familias": 13,
+        "maior": 3
+      },
+      {
+        "percentil": 0.1,
+        "limiar": 0.3513,
+        "arestas": 32,
+        "familias": 15,
+        "maior": 5
+      },
+      {
+        "percentil": 0.15,
+        "limiar": 0.2984,
+        "arestas": 48,
+        "familias": 21,
+        "maior": 5
+      },
+      {
+        "percentil": 0.2,
+        "limiar": 0.2631,
+        "arestas": 65,
+        "familias": 20,
+        "maior": 6
+      }
+    ]
+  }
+}

@@ -76,37 +76,49 @@ Dessa forma, os dados textuais são transformados em uma estrutura de grafo adeq
 
 ```
 .
-├── main.py                       # entrypoint: pipeline interativo (BFS + cliques) + gera o relatório
-├── visualizacao.py               # desenho do grafo bipartido (só matplotlib/networkx)
-├── visualizacao_similaridade.py  # desenho do heatmap + grafo de famílias de regiões
-├── gerar_visualizacao_bfs.py     # exporta a visualização do BFS
-├── grafo_culinario.html          # visualização interativa (D3.js) do grafo
+├── main.py                           # entrypoint: pipeline interativo + gera relatório
+├── visualizacao.py                   # desenho do grafo bipartido (matplotlib/networkx)
+├── visualizacao_similaridade.py      # heatmap + grafo de famílias de regiões
+├── gerar_visualizacao_bfs.py         # exporta visualização interativa do BFS
+├── grafo_culinario.html              # visualização interativa (D3.js)
 ├── data/
 │   ├── processed/
 │   │   ├── arestas_com_peso.csv
 │   │   ├── culinarydb_arestas.csv
 │   │   └── metadados_grafo.json
-│   └── output/                   # artefatos gerados (relatorio.md, resultados.json, PNGs)
+│   └── output/                       # artefatos gerados
+│       ├── panorama_bipartido.png
+│       ├── regiao_china.png
+│       ├── regiao_france.png
+│       ├── regiao_italy.png
+│       ├── regiao_japan.png
+│       ├── regiao_mexico.png
+│       ├── similaridade_regioes.png
+│       ├── top_arestas.png
+│       ├── relatorio.md
+│       ├── resultados.json
+│       └── visualizacao_bfs.html
 ├── slides/
+│   ├── trabalho_eda2_final.pdf
+│   └── slides_apresentacao.html
 ├── src/
 │   ├── normalizacao/
-│   │   ├── entidades.py
-│   │   ├── nlp.py
-│   │   ├── preparacao.py
-│   │   ├── README.md
-│   │   └── validacao.py
-│   ├── fila/                     # estrutura de dados Fila + BFS (pacote)
+│   │   ├── entidades.py              # normalização de ingredientes via aliases
+│   │   ├── nlp.py                    # pipeline spaCy nas direções das receitas
+│   │   ├── preparacao.py             # join receitas + ingredientes → arestas CSV
+│   │   ├── validacao.py              # raio-x da base gerada
+│   │   └── README.md
+│   ├── fila/                         # estrutura de dados Fila + BFS (pacote)
 │   │   ├── __init__.py
-│   │   ├── fila.py               # Fila (FIFO) sobre lista encadeada
-│   │   └── bfs.py                # Busca em Largura
-│   ├── grafo.py                  # construção do grafo bipartido TF-IDF
-│   ├── clique.py                 # Bron-Kerbosch (cliques máximos)
-│   ├── cosseno.py                # similaridade de cosseno + projeção do grafo
-│   ├── similaridade.py           # Jaccard entre assinaturas de regiões
-│   └── relatorio.py              # orquestra todas as peças e gera o relatório
+│   │   ├── fila.py                   # Fila (FIFO) sobre lista encadeada
+│   │   └── bfs.py                    # Busca em Largura
+│   ├── grafo.py                      # construção do grafo bipartido TF-IDF
+│   ├── clique.py                     # Bron-Kerbosch (cliques máximos)
+│   ├── cosseno.py                    # similaridade de cosseno + projeção do grafo
+│   ├── similaridade.py               # Jaccard entre assinaturas de regiões
+│   └── relatorio.py                  # orquestra todas as peças e gera o relatório
 ├── testes/
 │   └── teste_bfs.py
-├── .gitignore
 ├── pyproject.toml
 ├── README.md
 ├── requirements.txt

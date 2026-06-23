@@ -141,10 +141,10 @@
   - (2) eastern europe, usa
 
 **Famílias idênticas nas duas lentes (robustas):**
-  - (2) greece, middle east
   - (2) australia & nz, greece
-  - (2) africa, middle east
   - (3) china, japan, korea
+  - (2) africa, middle east
+  - (2) greece, middle east
 
 - Clique asiático *china/korea/south east asia/thailand*: Jaccard = sim, Cosseno = não.
 
