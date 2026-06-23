@@ -1,10 +1,31 @@
-# Relatório de análise — grafo culinário (CulinaryDB)
+# Relatório de Análise — Grafo Culinário (CulinaryDB)
 
-> Pesos escolhidos nesta execução: **limiar de Jaccard = 0.2**, **percentil do cosseno = 10%**, **assinatura top-30**.
+*Documento gerado automaticamente em 22/06/2026.*
 
-Grafo bipartido **região ↔ ingrediente** com pesos **TF-IDF**. Todos os números são calculados pelo código do grupo (grafo, BFS/fila, Bron-Kerbosch, Jaccard, cosseno); matplotlib é usado só para desenhar.
+| | |
+|---|---|
+| **Base de dados** | CulinaryDB |
+| **Modelagem** | grafo bipartido região ↔ ingrediente |
+| **Peso das arestas** | TF-IDF (frequência regional normalizada) |
+| **Algoritmos** | BFS, Bron–Kerbosch, similaridade de Jaccard e de cosseno |
+| **Limiar de Jaccard** | 0.2 |
+| **Percentil do cosseno** | 10% |
+| **Assinatura regional** | top-30 ingredientes por TF-IDF |
 
-## 1. Panorama do grafo
+---
+
+## Sumário
+
+1. [Panorama do grafo bipartido](#1-panorama-do-grafo-bipartido)
+2. [Assinatura regional por TF-IDF](#2-assinatura-regional-por-tf-idf)
+3. [Conectividade e distâncias (fila e BFS)](#3-conectividade-e-distâncias-fila-e-bfs)
+4. [Famílias de regiões (Bron–Kerbosch sobre a similaridade)](#4-famílias-de-regiões-bronkerbosch-sobre-a-similaridade)
+5. [Famílias de ingredientes (projeção ingrediente-ingrediente)](#5-famílias-de-ingredientes-projeção-ingrediente-ingrediente)
+6. [Sensibilidade ao limiar](#6-sensibilidade-ao-limiar)
+
+---
+
+## 1. Panorama do grafo bipartido
 
 - **26 regiões**, **666 ingredientes**, **7875 arestas** região↔ingrediente.
 - Densidade bipartida: **45.5%**.
@@ -27,7 +48,7 @@ Grafo bipartido **região ↔ ingrediente** com pesos **TF-IDF**. Todos os núme
 
 ![Arestas de maior peso TF-IDF](top_arestas.png)
 
-## 2. Assinatura regional (top ingredientes por TF-IDF)
+## 2. Assinatura regional por TF-IDF
 
 - **africa**: couscou, chickpea, harissa, saffron, cumin, turmeric
 - **australia & nz**: cheese feta, cheese parmesan, oat, pasta, salad dressing, artichoke
@@ -67,7 +88,7 @@ Grafo bipartido **região ↔ ingrediente** com pesos **TF-IDF**. Todos os núme
 ![Ingredientes-assinatura de mexico](regiao_mexico.png)
 
 
-## 3. Conectividade (Fila + BFS)
+## 3. Conectividade e distâncias (fila e BFS)
 
 - Grafo **conexo**: alcançam-se 692/692 vértices.
 - **Diâmetro região↔região: 2 arestas** (2 = compartilham um ingrediente).
@@ -81,7 +102,7 @@ Grafo bipartido **região ↔ ingrediente** com pesos **TF-IDF**. Todos os núme
 | indian subcontinent | france | 2 | sunflower |
 | scandinavia | thailand | 2 | cardamom |
 
-## 4. Famílias de regiões (clique de Bron-Kerbosch sobre a similaridade)
+## 4. Famílias de regiões (Bron–Kerbosch sobre a similaridade)
 
 - **Jaccard** (assinatura top-30), limiar 0.2: **21 arestas**.
 - **Cosseno** (vetor TF-IDF completo), percentil 10% → limiar 0.3513: **32 arestas**.
@@ -120,14 +141,14 @@ Grafo bipartido **região ↔ ingrediente** com pesos **TF-IDF**. Todos os núme
   - (2) eastern europe, usa
 
 **Famílias idênticas nas duas lentes (robustas):**
-  - (3) china, japan, korea
-  - (2) australia & nz, greece
   - (2) greece, middle east
+  - (2) australia & nz, greece
   - (2) africa, middle east
+  - (3) china, japan, korea
 
 - Clique asiático *china/korea/south east asia/thailand*: Jaccard = sim, Cosseno = não.
 
-## 5. Famílias de ingredientes (projeção ingrediente↔ingrediente, cosseno)
+## 5. Famílias de ingredientes (projeção ingrediente-ingrediente)
 
 - Percentil 1% → limiar 0.8459; **473 cliques**, 151 com >2 elementos, maior com **32**.
   - (32) amchoor, asafetida, asafoetida, bay laurel, bean cluster, bitter gourd, bread wheaten, capsicum (+24)
@@ -136,7 +157,7 @@ Grafo bipartido **região ↔ ingrediente** com pesos **TF-IDF**. Todos os núme
   - (30) amchoor, asafetida, asafoetida, bay laurel, bean cluster, bitter gourd, bread wheaten, capsicum (+22)
   - (18) cheese provolone, cheese ricotta, cheese romano, curd, cuttlefish, fettuccine, lady finger, lasagna (+10)
 
-## 6. Sensibilidade ao limiar (varredura)
+## 6. Sensibilidade ao limiar
 
 | método | parâmetro | arestas | famílias | maior clique |
 |---|---|---|---|---|
@@ -149,8 +170,3 @@ Grafo bipartido **região ↔ ingrediente** com pesos **TF-IDF**. Todos os núme
 | Cosseno | 15% (lim 0.2984) | 48 | 21 | 5 |
 | Cosseno | 20% (lim 0.2631) | 65 | 20 | 6 |
 
-## 7. Síntese
-
-- **Robusto** (independe da métrica): eixo do Leste Asiático *china/japan/korea* e os laços *greece/middle east* e *africa/middle east*.
-- **Sensível à métrica**: o cosseno funde um bloco ocidental/anglo-europeu que o Jaccard mantém separado — a modelagem **muda** a leitura das comunidades.
-- A projeção ingrediente↔ingrediente é exclusiva do cosseno; região↔região existe nas duas lentes, por isso é onde a comparação faz sentido.

@@ -14,8 +14,10 @@ comando). Pode rodar direto também: `uv run python3 src/relatorio.py`.
 import io
 import json
 import os
+import re
 import sys
 from contextlib import redirect_stdout
+from datetime import date
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -214,6 +216,13 @@ def _img(nome):
     return nome.replace(" ", "%20")
 
 
+def _slug(texto):
+    """Âncora no padrão do GitHub: minúsculas, sem pontuação, espaços viram '-'.
+    Mantém o sumário sincronizado com os títulos das seções."""
+    s = re.sub(r"[^\w\s-]", "", texto.lower())
+    return re.sub(r"\s+", "-", s.strip())
+
+
 def _gerar_visualizacoes(limiar_jaccard, top_k, regioes):
     """Reaproveita visualizacao.py e visualizacao_similaridade.py para gerar os
     PNGs com os parâmetros escolhidos. Devolve os nomes dos arquivos gerados."""
@@ -241,15 +250,36 @@ def _render_md(R, figs):
     L = []
     w = L.append
 
-    w("# Relatório de análise — grafo culinário (CulinaryDB)\n")
-    w(f"> Pesos escolhidos nesta execução: **limiar de Jaccard = {par['limiar_jaccard']}**, "
-      f"**percentil do cosseno = {int(par['percentil_cosseno']*100)}%**, "
-      f"**assinatura top-{par['top_k']}**.\n")
-    w("Grafo bipartido **região ↔ ingrediente** com pesos **TF-IDF**. Todos os números são "
-      "calculados pelo código do grupo (grafo, BFS/fila, Bron-Kerbosch, Jaccard, cosseno); "
-      "matplotlib é usado só para desenhar.\n")
+    secoes = [
+        "Panorama do grafo bipartido",
+        "Assinatura regional por TF-IDF",
+        "Conectividade e distâncias (fila e BFS)",
+        "Famílias de regiões (Bron–Kerbosch sobre a similaridade)",
+        "Famílias de ingredientes (projeção ingrediente-ingrediente)",
+        "Sensibilidade ao limiar",
+    ]
 
-    w("## 1. Panorama do grafo\n")
+    w("# Relatório de Análise — Grafo Culinário (CulinaryDB)\n")
+    w(f"*Documento gerado automaticamente em {date.today().strftime('%d/%m/%Y')}.*\n")
+
+    w("| | |")
+    w("|---|---|")
+    w("| **Base de dados** | CulinaryDB |")
+    w("| **Modelagem** | grafo bipartido região ↔ ingrediente |")
+    w("| **Peso das arestas** | TF-IDF (frequência regional normalizada) |")
+    w("| **Algoritmos** | BFS, Bron–Kerbosch, similaridade de Jaccard e de cosseno |")
+    w(f"| **Limiar de Jaccard** | {par['limiar_jaccard']} |")
+    w(f"| **Percentil do cosseno** | {int(par['percentil_cosseno']*100)}% |")
+    w(f"| **Assinatura regional** | top-{par['top_k']} ingredientes por TF-IDF |")
+    w("")
+    w("---\n")
+
+    w("## Sumário\n")
+    for i, t in enumerate(secoes, 1):
+        w(f"{i}. [{t}](#{i}-{_slug(t)})")
+    w("\n---\n")
+
+    w(f"## 1. {secoes[0]}\n")
     w(f"- **{p['n_regioes']} regiões**, **{p['n_ingredientes']} ingredientes**, "
       f"**{p['n_arestas']} arestas** região↔ingrediente.")
     w(f"- Densidade bipartida: **{p['densidade_bipartida']*100:.1f}%**.")
@@ -265,14 +295,14 @@ def _render_md(R, figs):
     if figs.get("top"):
         w(f"![Arestas de maior peso TF-IDF]({_img(figs['top'])})\n")
 
-    w("## 2. Assinatura regional (top ingredientes por TF-IDF)\n")
+    w(f"## 2. {secoes[1]}\n")
     for reg, lst in R["assinaturas"].items():
         w(f"- **{reg}**: {', '.join(i['ingrediente'] for i in lst[:6])}")
     w("")
     for reg in figs.get("regioes", []):
         w(f"![Ingredientes-assinatura de {reg}]({_img(f'regiao_{reg}.png')})\n")
 
-    w("\n## 3. Conectividade (Fila + BFS)\n")
+    w(f"\n## 3. {secoes[2]}\n")
     w(f"- Grafo **{'conexo' if c['grafo_conexo'] else 'NÃO conexo'}**: "
       f"alcançam-se {c['vertices_alcancados_de_0']}/{c['vertices_totais']} vértices.")
     w(f"- **Diâmetro região↔região: {c['diametro_regiao_regiao']} arestas** "
@@ -283,7 +313,7 @@ def _render_md(R, figs):
     for e in c["exemplos_ponte"]:
         w(f"| {e['de']} | {e['para']} | {e['distancia']} | {', '.join(e['ponte']) or '—'} |")
 
-    w("\n## 4. Famílias de regiões (clique de Bron-Kerbosch sobre a similaridade)\n")
+    w(f"\n## 4. {secoes[3]}\n")
     w(f"- **Jaccard** (assinatura top-{par['top_k']}), limiar {par['limiar_jaccard']}: "
       f"**{f['arestas_jaccard']} arestas**.")
     w(f"- **Cosseno** (vetor TF-IDF completo), percentil {int(par['percentil_cosseno']*100)}% "
@@ -306,7 +336,7 @@ def _render_md(R, figs):
       f"Jaccard = {'sim' if f['clique_asiatico_em_jaccard'] else 'não'}, "
       f"Cosseno = {'sim' if f['clique_asiatico_em_cosseno'] else 'não'}.")
 
-    w("\n## 5. Famílias de ingredientes (projeção ingrediente↔ingrediente, cosseno)\n")
+    w(f"\n## 5. {secoes[4]}\n")
     w(f"- Percentil {int(fi['percentil']*100)}% → limiar {fi['limiar_calculado']}; "
       f"**{fi['n_cliques_total']} cliques**, {fi['n_cliques_grandes']} com >2 elementos, "
       f"maior com **{fi['maior_clique']}**.")
@@ -314,21 +344,14 @@ def _render_md(R, figs):
         amostra = ", ".join(grp[:8]) + (f" (+{len(grp)-8})" if len(grp) > 8 else "")
         w(f"  - ({len(grp)}) {amostra}")
 
-    w("\n## 6. Sensibilidade ao limiar (varredura)\n")
+    w(f"\n## 6. {secoes[5]}\n")
     w("| método | parâmetro | arestas | famílias | maior clique |")
     w("|---|---|---|---|---|")
     for r in vv["jaccard"]:
         w(f"| Jaccard | limiar {r['limiar']} | {r['arestas']} | {r['familias']} | {r['maior']} |")
     for r in vv["cosseno"]:
         w(f"| Cosseno | {int(r['percentil']*100)}% (lim {r['limiar']}) | {r['arestas']} | {r['familias']} | {r['maior']} |")
-
-    w("\n## 7. Síntese\n")
-    w("- **Robusto** (independe da métrica): eixo do Leste Asiático *china/japan/korea* "
-      "e os laços *greece/middle east* e *africa/middle east*.")
-    w("- **Sensível à métrica**: o cosseno funde um bloco ocidental/anglo-europeu que o "
-      "Jaccard mantém separado — a modelagem **muda** a leitura das comunidades.")
-    w("- A projeção ingrediente↔ingrediente é exclusiva do cosseno; região↔região existe "
-      "nas duas lentes, por isso é onde a comparação faz sentido.")
+    w("")
     return "\n".join(L) + "\n"
 
 
